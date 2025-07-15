@@ -11,6 +11,7 @@ import UserContext from "./utils/userContext.js";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore.js";
 import { Cart } from "./components/Cart.js";
+import { Nav } from "./components/nav";
 
 const Grocery = lazy(()=> import("./components/Grocery"))
 
@@ -33,6 +34,7 @@ const AppLayout = () => {
             <UserContext.Provider value={{loggedInUser : userName, setUserName}}>
                 <div className="app overflow-hidden">
                     <Header />
+                    <Nav />
                     <Outlet />
                 </div>
             </UserContext.Provider>

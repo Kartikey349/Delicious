@@ -3,11 +3,18 @@ import { LOGO_URL } from "../utils/contant";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/userContext";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleNav } from "../utils/navSlice";
 
 const Header = () => {
 
-    const {loggedInUser} = useContext(UserContext);
+    const dispatch = useDispatch();
+
+    const toggleMenuHandler = () => {
+        dispatch(toggleNav());
+    }
+
+    //const {loggedInUser} = useContext(UserContext);
 
     const onlineStatus = useOnlineStatus();
 
@@ -25,28 +32,30 @@ const Header = () => {
             </div>
 
             <div className="nav-items">
-                <ul className="flex p-4 items-center">
+                <ul className="flex p-4 items-center gap-2">
                     <Link to="/">
-                        <li className="px-2 hidden sm:block">Home</li>
+                        <li className="hidden sm:block">Home</li>
                     </Link>
                     
                     <Link to="/about">
-                        <li className="px-2 hidden sm:block">About</li>
+                        <li className="hidden sm:block">About</li>
                     </Link>
                     
                     <Link to="/contact">
-                        <li className="px-2 hidden sm:block">Contact</li>
+                        <li className="hidden sm:block">Contact</li>
                     </Link>
 
                     <Link to="/grocery">
-                        <li className="px-2 hidden sm:block">Grocery</li>
+                        <li className=" hidden sm:block">Grocery</li>
                     </Link>
                     
                     <Link to="/cart">
-                        <li className="px-4 md:px-2">
+                        <li className=" md:px-2">
                             <i className="fa-solid fa-cart-shopping"></i> ({cartItems.length})
                         </li>
                     </Link>
+
+                     <i className="fa-solid fa-bars text-2xl cursor-pointer sm:hidden" onClick={() => toggleMenuHandler()}></i>
 
                     <button className=" border bg-green-600 text-white rounded-sm px-2 py-1" onClick={() => {
                         loginBtn === "Login" ? 
@@ -55,7 +64,7 @@ const Header = () => {
 
                     {/* <li className="p-2">{loggedInUser}</li> */}
 
-                    <li className="text-[8px] pl-1">
+                    <li className="text-[8px]">
                         {onlineStatus ? "🟢" : "🔴"}
                     </li>
                 </ul>
