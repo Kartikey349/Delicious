@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { promotedLabel } from "./RestaurantCard";
 import UserContext from "../utils/userContext";
+import { useDispatch } from "react-redux";
+import { navClose } from "../utils/navSlice";
 
 const filteredList = (filteredListOfRes, searchText) => {
     let filteredList = filteredListOfRes.filter((restaurant)=> restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -23,6 +25,12 @@ const Body = () => {
 
     //higher order component used
     const RestaurantCardPromoted = promotedLabel(RestaurantCard);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(navClose());
+    })
 
 
     useEffect(()=> {
