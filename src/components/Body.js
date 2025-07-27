@@ -58,8 +58,9 @@ const Body = () => {
         )
     }
 
+      if (!listOfRestaurant) return null;
     
-    return listOfRestaurant.length === 0 ? <Shimmer/> : (<div className="body flex flex-wrap justify-center flex-col">
+    return  (<div className="body flex flex-wrap justify-center flex-col">
         <div className="flex mt-10 items-center justify-center flex-col gap-2 md:flex-row">
 
             <div className="flex items-center">
@@ -75,7 +76,7 @@ const Body = () => {
 
             <div className="filter mx-10">
                 <button className="filter-btn border border-gray-600 h-10 p-2 rounded-sm" onClick={()=> {
-                    const filtered = listOfRestaurant.filter((res)=> res.info.avgRating > 4);
+                    const filtered = listOfRestaurant.filter((res)=> res.info.avgRating > 4.2);
                     setListOfRestaurant(filtered);
                 }}>Top rated restaurant</button>
             </div>
@@ -88,7 +89,14 @@ const Body = () => {
         </div>
 
 
-  <div className="res-container flex flex-wrap justify-center">
+    {listOfRestaurant.length === 0 ? (
+        <div className="flex flex-wrap justify-center mt-2">
+    {Array(16).fill(0).map((_, index) => (
+      <Shimmer key={index} />
+    ))}
+  </div>
+    ) :
+  (<div className="res-container flex flex-wrap justify-center">
            {
             listOfRestaurant.map((restaurant)=> {
                  return <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}> 
@@ -99,7 +107,7 @@ const Body = () => {
                  </Link>
             })
            }
-        </div>
+        </div>)}
     </div>)
 }
 

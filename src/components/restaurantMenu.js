@@ -13,7 +13,7 @@ const RestaurantMenu = () => {
     const resInfo =  useRestaurantMenu(resId);
 
 
-    if(resInfo === null) return <Shimmer />
+    if(resInfo === null) return <div>Loading....</div>;
 
     const {name,
         cuisines,
