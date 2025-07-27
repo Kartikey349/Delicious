@@ -55,7 +55,10 @@ const Header = () => {
                         </li>
                     </Link>
 
-                     <i className="fa-solid fa-bars text-2xl cursor-pointer sm:hidden" onClick={() => toggleMenuHandler()}></i>
+                    <li className="sm:hidden">
+                     <i className=" fa-solid fa-bars  text-2xl cursor-pointer " onClick={() => toggleMenuHandler()}></i>
+                    </li>
+
 
                     <button className=" border bg-green-600 text-white rounded-sm px-2 py-1" onClick={() => {
                         loginBtn === "Login" ? 
